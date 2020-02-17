@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
-using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -37,12 +33,12 @@ public class ChatHandler : MonoBehaviourPunCallbacks
 
             return;
         }
+
         var text = PhotonNetwork.NickName + ": " + inputText.text;
         Debug.Log("Sending a message with " + text);
         inputText.text = String.Empty;
         inputText.ActivateInputField(); //Re-focus on the input field
         inputText.Select(); //Re-focus on the input field
-        
         GameObject textMessage = Instantiate(messageTextPrefab, messagesList.transform, false) as GameObject;
         var objectText = textMessage.transform.GetChild(0).GetComponent<Text>();
         objectText.text = text;
@@ -75,26 +71,24 @@ public class ChatHandler : MonoBehaviourPunCallbacks
         toShow.SetActive(false);
         inputText.onEndEdit.AddListener(delegate { SendAMessage(); });
         myPhotonView = GetComponent<PhotonView>();
-        PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.ConnectUsingSettings();
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.LoadLevel("MenuScene");
+        }
+        else
+        {
+            ShowChat();
+        }
+
         myScrollRect = scrollView.GetComponent<ScrollRect>();
         ScrollToBottom();
-
         sendMessageButton.onClick.AddListener(SendAMessage);
     }
 
-    public override void OnConnectedToMaster()
+    private void ShowChat()
     {
-        Debug.Log("We are now connected to " + PhotonNetwork.CloudRegion);
         toHide.SetActive(false);
         toShow.SetActive(true);
-        RoomOptions roomOptions = new RoomOptions()
-        {
-            IsVisible = true,
-            IsOpen = true,
-            MaxPlayers = (byte) roomSize,
-        };
-        PhotonNetwork.JoinOrCreateRoom("mainChatRoom", roomOptions, null, null);
     }
 
     public override void OnJoinedRoom()
@@ -106,6 +100,5 @@ public class ChatHandler : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-      
     }
 }

@@ -4,6 +4,7 @@
     <e p="C:\Users\painor\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\painor\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_MabrokAlSan3a.-737647133.00" t="ExcludeRecursive" />
     <e p="G:\Learning\VideoGames\MabrokAlSan3a" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Photon" t="Include">
@@ -336,6 +337,16 @@
                 <e p="TextButtonTransition.cs" t="Include" />
                 <e p="TextToggleIsOnTransition.cs" t="Include" />
               </e>
+            </e>
+          </e>
+        </e>
+        <e p="Plugins" t="Include">
+          <e p="GitHub" t="Include">
+            <e p="Editor" t="Include">
+              <e p="credits.txt" t="Include" />
+              <e p="eula.txt" t="Include" />
+              <e p="ExtensionLoader.cs" t="Include" />
+              <e p="UnityAPIWrapper.cs" t="Include" />
             </e>
           </e>
         </e>
